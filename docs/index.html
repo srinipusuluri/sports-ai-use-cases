@@ -3,17 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Industry Use Cases - Comprehensive Repository</title>
+    <title>AI in Sports & Sports Analytics - Comprehensive Use Cases</title>
     <style>
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #10b981;
-            --accent-color: #f59e0b;
+            --primary-color: #ef4444;
+            --secondary-color: #3b82f6;
+            --accent-color: #10b981;
             --bg-color: #0f172a;
             --card-bg: #1e293b;
             --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --border-color: #334155;
+            --sports-red: #ef4444;
+            --team-blue: #3b82f6;
+            --victory-gold: #f59e0b;
+            --performance-green: #10b981;
         }
 
         * {
@@ -45,7 +49,7 @@
         h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            background: linear-gradient(45deg, var(--sports-red), var(--team-blue), var(--victory-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -63,81 +67,59 @@
             margin-bottom: 2rem;
         }
 
-        .intro-section {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .intro-section h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-
-        .intro-section p {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .importance-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .importance-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            transition: all 0.3s ease;
-        }
-
-        .importance-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-            border-color: rgba(255,255,255,0.1);
-        }
-
-        .importance-card h3 {
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .importance-card ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .importance-card li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border-color);
+        .nav-container {
             display: flex;
-            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
         }
 
-        .importance-card li::before {
-            content: '✓';
-            color: var(--secondary-color);
-            font-weight: bold;
-            margin-right: 1rem;
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .industry-grid {
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-color: var(--primary-color);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, var(--sports-red), var(--team-blue));
+            border: none;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
             margin-bottom: 3rem;
         }
 
-        .industry-card {
+        .card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
@@ -147,98 +129,151 @@
             overflow: hidden;
         }
 
-        .industry-card:hover {
+        .card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             border-color: rgba(255,255,255,0.1);
         }
 
-        .industry-card::before {
+        .card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            background: linear-gradient(90deg, var(--sports-red), var(--team-blue), var(--victory-gold));
         }
 
-        .industry-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
+        .card-header {
             display: flex;
             align-items: center;
             gap: 1rem;
+            margin-bottom: 1.5rem;
         }
 
-        .industry-icon {
-            font-size: 2rem;
+        .icon {
             width: 50px;
             height: 50px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255,255,255,0.1);
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
-        .industry-description {
+        .icon.ml { background: rgba(239, 68, 68, 0.2); color: var(--sports-red); }
+        .icon.gen { background: rgba(59, 130, 246, 0.2); color: var(--team-blue); }
+        .icon.ag { background: rgba(167, 139, 250, 0.2); color: var(--victory-gold); }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
-
-        .industry-link {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            margin-bottom: 1.5rem;
         }
 
-        .industry-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            text-decoration: none;
-            color: white;
+        .card-content {
+            margin-bottom: 2rem;
         }
 
-        .tech-overview {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            margin-bottom: 3rem;
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--sports-red), var(--team-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .tech-overview h2 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .tech-tag {
             background: rgba(255,255,255,0.1);
             color: var(--text-secondary);
-            padding: 0.5rem 1rem;
+            padding: 0.25rem 0.75rem;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             border: 1px solid var(--border-color);
-            display: inline-block;
-            margin: 0.25rem;
+        }
+
+        .architecture-diagram {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .architecture-item::before {
+            content: '→';
+            color: var(--sports-red);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(59, 130, 246, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-title {
+            color: var(--sports-red);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--sports-red);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
         }
 
         footer {
@@ -249,452 +284,1097 @@
             color: var(--text-secondary);
         }
 
-        .github-link {
-            display: inline-block;
-            background: #333;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
+        .sports-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
         }
 
-        .github-link:hover {
-            background: #fff;
-            color: #000;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            text-decoration: none;
-            color: #000;
+        .team-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        .victory-badge {
+            background: rgba(245, 158, 11, 0.2);
+            color: #f59e0b;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            margin-left: 0.5rem;
         }
 
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
             .container { padding: 1rem; }
-            .industry-grid { grid-template-columns: 1fr; }
+            .card-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🤖 AI Industry Use Cases</h1>
-            <p class="subtitle">Comprehensive Repository of Machine Learning, Generative AI, and Agentic Systems Across 26 Industries</p>
+            <h1>🏅 AI in Sports & Sports Analytics</h1>
+            <p class="subtitle">Comprehensive Guide to Machine Learning, Generative AI, and Agentic Systems in Athletic Performance, Team Management, and Fan Engagement</p>
         </header>
 
-        <section class="intro-section">
-            <h2>📋 Repository Overview</h2>
-            <p><strong>AI Industry Use Cases</strong> is a comprehensive collection of AI applications across 26 major industries, showcasing how cutting-edge technologies are transforming business operations, customer experiences, and industry standards.</p>
-            
-            <p>This repository serves as a practical guide for AI practitioners, business leaders, and technology enthusiasts to understand the real-world applications of AI technologies across diverse sectors.</p>
-            
-            <p>Each industry page contains detailed use cases covering three key AI technology categories:</p>
-            
-            <div class="tech-grid">
-                <span class="tech-tag">🔮 Machine Learning & Predictive Analytics</span>
-                <span class="tech-tag">✍️ Generative AI Applications</span>
-                <span class="tech-tag">🤖 Agentic AI Systems</span>
-            </div>
-        </section>
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('ml')">🔮 ML / Predictive</button>
+            <button class="nav-btn" onclick="showSection('gen')">✍️ Generative AI</button>
+            <button class="nav-btn" onclick="showSection('agentic')">🤖 Agentic AI</button>
+        </div>
 
-        <section class="tech-overview">
-            <h2>🔬 AI Technology Categories</h2>
-            <p>Each industry page demonstrates practical applications across three cutting-edge AI technology categories:</p>
-            
-            <div class="tech-grid">
-                <div class="tech-tag">🔮 ML / Predictive Analytics</div>
-                <div class="tech-tag">Advanced statistical models and algorithms for forecasting, classification, and optimization</div>
-                <div class="tech-tag">✍️ Generative AI Applications</div>
-                <div class="tech-tag">AI-powered content creation, communication, and analysis for business operations</div>
-                <div class="tech-tag">🤖 Agentic AI Systems</div>
-                <div class="tech-tag">Autonomous AI agents that can reason, plan, and execute complex workflows</div>
-            </div>
-        </section>
+        <!-- ML / Predictive Use Cases -->
+        <div id="ml" class="content-section active">
+            <h2 class="section-title">🔮 Machine Learning & Predictive Analytics</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Advanced statistical models and algorithms for athletic performance analysis, injury prevention, and competitive strategy optimization
+            </p>
 
-        <section class="importance-grid">
-            <div class="importance-card">
-                <h3>🌍 Why Industry-Specific AI Matters</h3>
-                <ul>
-                    <li>Each industry has unique challenges, regulations, and data characteristics</li>
-                    <li>Industry-specific solutions address domain knowledge and compliance requirements</li>
-                    <li>Specialized AI models achieve better performance on industry-specific tasks</li>
-                    <li>Domain expertise ensures practical, implementable solutions</li>
-                    <li>Industry context drives innovation and competitive advantage</li>
-                </ul>
-            </div>
-
-            <div class="importance-card">
-                <h3>🚀 Strategic Value</h3>
-                <ul>
-                    <li>Accelerates AI adoption across traditional industries</li>
-                    <li>Provides blueprints for digital transformation initiatives</li>
-                    <li>Enables cross-industry learning and innovation transfer</li>
-                    <li>Supports workforce upskilling and AI literacy</li>
-                    <li>Facilitates informed investment and technology decisions</li>
-                </ul>
-            </div>
-
-            <div class="importance-card">
-                <h3>💡 Innovation Impact</h3>
-                <ul>
-                    <li>Drives efficiency and cost reduction across sectors</li>
-                    <li>Enhances customer experience and personalization</li>
-                    <li>Enables new business models and revenue streams</li>
-                    <li>Improves decision-making with data-driven insights</li>
-                    <li>Addresses complex societal challenges through technology</li>
-                </ul>
-            </div>
-        </section>
-
-        <section>
-            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--primary-color); font-size: 2.5rem;">🏢 Industry Categories</h2>
-            
-            <div class="industry-grid">
-                <!-- Finance Industry -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">💰</div>
-                        <a href="finance-ai-use-cases.html" style="color: inherit; text-decoration: none;">Finance Industry</a>
+            <div class="card-grid">
+                <!-- Player Performance Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🏆</div>
+                        <div>
+                            <div class="card-title">Player Performance</div>
+                            <div class="card-subtitle">Athletic Analysis</div>
+                        </div>
                     </div>
-                    <div class="industry-description">
-                        Risk management, trading, compliance, and customer service applications
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict individual player performance metrics and outcomes based on historical data, training patterns, and physiological indicators.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Performance Analysis</span>
+                            <span class="tech-tag">Athletic Metrics</span>
+                            <span class="tech-tag">Predictive Modeling</span>
+                            <span class="tech-tag">Training Data</span>
+                            <span class="tech-tag">Physiological Monitoring</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Training Data → Performance Metrics → Pattern Analysis → Prediction → Optimization → Results</div>
+                            <div class="architecture-item">Athlete Data → Historical Analysis → Performance Modeling → Prediction → Training → Improvement</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical performance data</li>
+                                <li>Training regimen details</li>
+                                <li>Physiological measurements</li>
+                                <li>Biomechanical analysis</li>
+                                <li>Recovery patterns</li>
+                                <li>Competition history</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Performance Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Training Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Performance Improvement</div>
+                            </div>
+                        </div>
                     </div>
-                    <a href="finance-ai-use-cases.html" class="industry-link">Explore Finance AI</a>
                 </div>
 
-                <!-- Healthcare Industry -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🏥</div>
-                        <a href="../healthcare-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Healthcare Industry</a>
+                <!-- Injury Risk Modeling -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⚠️</div>
+                        <div>
+                            <div class="card-title">Injury Risk</div>
+                            <div class="card-subtitle">Prevention Analysis</div>
+                        </div>
                     </div>
-                    <div class="industry-description">
-                        Clinical decision support, patient care, and medical research applications
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Model and predict injury risks for athletes by analyzing training loads, biomechanics, and recovery patterns to implement preventive measures.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Injury Prevention</span>
+                            <span class="tech-tag">Biomechanical Analysis</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Recovery Monitoring</span>
+                            <span class="tech-tag">Load Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Biomechanical Data → Load Analysis → Risk Assessment → Prevention → Monitoring → Recovery</div>
+                            <div class="architecture-item">Athlete Metrics → Risk Modeling → Prevention → Monitoring → Adjustment → Safety</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Biomechanical measurements</li>
+                                <li>Training load data</li>
+                                <li>Recovery metrics</li>
+                                <li>Injury history</li>
+                                <li>Physiological indicators</li>
+                                <li>Environmental factors</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Injury Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Injury Prevention</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Athlete Safety</div>
+                            </div>
+                        </div>
                     </div>
-                    <a href="../healthcare-ai-use-cases/index.html" class="industry-link">Explore Healthcare AI</a>
                 </div>
 
-                <!-- Transportation & Logistics -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🚚</div>
-                        <a href="../transportation-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Transportation & Logistics</a>
+                <!-- Game Outcome Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🎯</div>
+                        <div>
+                            <div class="card-title">Game Outcome</div>
+                            <div class="card-subtitle">Match Analysis</div>
+                        </div>
                     </div>
-                    <div class="industry-description">
-                        Supply chain optimization, fleet management, and delivery operations
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict game outcomes and key performance indicators by analyzing team statistics, player form, and tactical matchups.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Game Analysis</span>
+                            <span class="tech-tag">Outcome Prediction</span>
+                            <span class="tech-tag">Team Statistics</span>
+                            <span class="tech-tag">Performance Metrics</span>
+                            <span class="tech-tag">Tactical Analysis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Team Data → Player Form → Tactical Analysis → Outcome Prediction → Strategy → Results</div>
+                            <div class="architecture-item">Historical Data → Performance Analysis → Prediction → Strategy → Execution → Outcome</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Team performance statistics</li>
+                                <li>Player form data</li>
+                                <li>Head-to-head records</li>
+                                <li>Tactical analysis</li>
+                                <li>Environmental factors</li>
+                                <li>Injury reports</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">75-85%</div>
+                                <div class="metric-label">Outcome Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Strategic Advantage</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Win Probability</div>
+                            </div>
+                        </div>
                     </div>
-                    <a href="../transportation-ai-use-cases/index.html" class="industry-link">Explore Transportation AI</a>
                 </div>
 
-                <!-- Automotive Industry -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🚗</div>
-                        <a href="../automotive-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Automotive Industry</a>
+                <!-- Ticket Demand Forecasting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🎫</div>
+                        <div>
+                            <div class="card-title">Ticket Demand</div>
+                            <div class="card-subtitle">Revenue Analysis</div>
+                        </div>
                     </div>
-                    <div class="industry-description">
-                        Vehicle performance, safety systems, manufacturing, and mobility services
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Forecast ticket demand and optimize pricing strategies based on team performance, opponent strength, and market factors.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Demand Forecasting</span>
+                            <span class="tech-tag">Pricing Strategy</span>
+                            <span class="tech-tag">Revenue Optimization</span>
+                            <span class="tech-tag">Market Analysis</span>
+                            <span class="tech-tag">Fan Behavior</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Market Data → Demand Analysis → Pricing Strategy → Optimization → Revenue → Growth</div>
+                            <div class="architecture-item">Fan Data → Demand Forecasting → Pricing → Optimization → Sales → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical ticket sales</li>
+                                <li>Team performance data</li>
+                                <li>Opponent analysis</li>
+                                <li>Market trends</li>
+                                <li>Seasonal factors</li>
+                                <li>Competitor pricing</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Demand Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Revenue Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Ticket Sales</div>
+                            </div>
+                        </div>
                     </div>
-                    <a href="../automotive-ai-use-cases/index.html" class="industry-link">Explore Automotive AI</a>
                 </div>
 
-                <!-- Pharmaceuticals & Life Sciences -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">💊</div>
-                        <a href="../pharma-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Pharmaceuticals & Life Sciences</a>
+                <!-- Fan Engagement Scoring -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">❤️</div>
+                        <div>
+                            <div class="card-title">Fan Engagement</div>
+                            <div class="card-subtitle">Audience Analysis</div>
+                        </div>
                     </div>
-                    <div class="industry-description">
-                        Drug discovery, clinical trials, regulatory compliance, and precision medicine
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Score and predict fan engagement levels to optimize marketing strategies, content delivery, and fan experience initiatives.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Fan Analytics</span>
+                            <span class="tech-tag">Engagement Scoring</span>
+                            <span class="tech-tag">Behavioral Analysis</span>
+                            <span class="tech-tag">Content Optimization</span>
+                            <span class="tech-tag">Experience Enhancement</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Fan Data → Engagement Analysis → Scoring → Strategy → Content → Experience</div>
+                            <div class="architecture-item">Behavioral Data → Analysis → Scoring → Optimization → Engagement → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Fan interaction data</li>
+                                <li>Social media engagement</li>
+                                <li>Ticket purchasing patterns</li>
+                                <li>Merchandise sales</li>
+                                <li>Content consumption</li>
+                                <li>Feedback and surveys</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Engagement Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Fan Retention</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Revenue Growth</div>
+                            </div>
+                        </div>
                     </div>
-                    <a href="../pharma-ai-use-cases/index.html" class="industry-link">Explore Pharma AI</a>
                 </div>
 
-                <!-- Media & Entertainment -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🎬</div>
-                        <a href="../media-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Media & Entertainment</a>
+                <!-- Recruitment Analytics -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🔍</div>
+                        <div>
+                            <div class="card-title">Recruitment Analytics</div>
+                            <div class="card-subtitle">Talent Scouting</div>
+                        </div>
                     </div>
-                    <div class="industry-description">
-                        Content creation, audience engagement, streaming optimization, and creative production
-                    </div>
-                    <a href="../media-ai-use-cases/index.html" class="industry-link">Explore Media AI</a>
-                </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Analyze player potential and fit for team needs using performance data, physical attributes, and development trajectories.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Talent Analysis</span>
+                            <span class="tech-tag">Player Scouting</span>
+                            <span class="tech-tag">Performance Metrics</span>
+                            <span class="tech-tag">Development Tracking</span>
+                            <span class="tech-tag">Team Fit Analysis</span>
+                        </div>
 
-                <!-- Education (EdTech) -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🎓</div>
-                        <a href="../education-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Education (EdTech)</a>
-                    </div>
-                    <div class="industry-description">
-                        Personalized learning, academic support, educational planning, and student success
-                    </div>
-                    <a href="../education-ai-use-cases/index.html" class="industry-link">Explore Education AI</a>
-                </div>
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Player Data → Performance Analysis → Potential Assessment → Team Fit → Recruitment → Development</div>
+                            <div class="architecture-item">Scouting Data → Analysis → Assessment → Recruitment → Integration → Performance</div>
+                        </div>
 
-                <!-- Travel & Hospitality -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">✈️</div>
-                        <a href="../travel-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Travel & Hospitality</a>
-                    </div>
-                    <div class="industry-description">
-                        Customer experience, revenue management, booking optimization, and global service delivery
-                    </div>
-                    <a href="../travel-ai-use-cases/index.html" class="industry-link">Explore Travel AI</a>
-                </div>
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Player performance statistics</li>
+                                <li>Physical measurements</li>
+                                <li>Development history</li>
+                                <li>Team requirements</li>
+                                <li>Competition analysis</li>
+                                <li>Scouting reports</li>
+                            </ul>
+                        </div>
 
-                <!-- Agriculture (AgTech) -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🌾</div>
-                        <a href="./agriculture-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Agriculture (AgTech)</a>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Talent Assessment</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Recruitment Success</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Team Performance</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="industry-description">
-                        Crop optimization, livestock management, precision farming, and sustainable agriculture
-                    </div>
-                    <a href="./agriculture-ai-use-cases/index.html" class="industry-link">Explore Agriculture AI</a>
-                </div>
-
-                <!-- Government & Public Sector -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🏛️</div>
-                        <a href="../government-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Government & Public Sector</a>
-                    </div>
-                    <div class="industry-description">
-                        Public administration, citizen services, policy management, and civic engagement
-                    </div>
-                    <a href="../government-ai-use-cases/index.html" class="industry-link">Explore Government AI</a>
-                </div>
-
-                <!-- Defense & Aerospace -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🚀</div>
-                        <a href="../defense-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Defense & Aerospace</a>
-                    </div>
-                    <div class="industry-description">
-                        Military operations, aerospace systems, security intelligence, and strategic command
-                    </div>
-                    <a href="../defense-ai-use-cases/index.html" class="industry-link">Explore Defense AI</a>
-                </div>
-
-                <!-- Cybersecurity -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🔒</div>
-                        <a href="../cybersecurity-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Cybersecurity</a>
-                    </div>
-                    <div class="industry-description">
-                        Threat detection, security operations, incident response, and protective systems
-                    </div>
-                    <a href="../cybersecurity-ai-use-cases/index.html" class="industry-link">Explore Cybersecurity AI</a>
-                </div>
-
-                <!-- Legal Services (LegalTech) -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">⚖️</div>
-                        <a href="../legaltech-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Legal Services (LegalTech)</a>
-                    </div>
-                    <div class="industry-description">
-                        Case management, legal research, contract analysis, and client service
-                    </div>
-                    <a href="../legaltech-ai-use-cases/index.html" class="industry-link">Explore Legal AI</a>
-                </div>
-
-                <!-- Human Resources (HRTech) -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">👥</div>
-                        <a href="../hrtech-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Human Resources (HRTech)</a>
-                    </div>
-                    <div class="industry-description">
-                        Talent management, workforce optimization, employee experience, and organizational development
-                    </div>
-                    <a href="../hrtech-ai-use-cases/index.html" class="industry-link">Explore HR AI</a>
-                </div>
-
-                <!-- Supply Chain & Procurement -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">📦</div>
-                        <a href="../supplychain-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Supply Chain & Procurement</a>
-                    </div>
-                    <div class="industry-description">
-                        Inventory optimization, supplier management, logistics coordination, and strategic sourcing
-                    </div>
-                    <a href="../supplychain-ai-use-cases/index.html" class="industry-link">Explore Supply Chain AI</a>
-                </div>
-
-                <!-- Marketing & Advertising -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">📢</div>
-                        <a href="../marketing-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Marketing & Advertising</a>
-                    </div>
-                    <div class="industry-description">
-                        Customer engagement, campaign management, content creation, and brand optimization
-                    </div>
-                    <a href="../marketing-ai-use-cases/index.html" class="industry-link">Explore Marketing AI</a>
-                </div>
-
-                <!-- Construction Industry -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🏗️</div>
-                        <a href="../construction-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Construction Industry</a>
-                    </div>
-                    <div class="industry-description">
-                        Project management, safety compliance, equipment maintenance, and structural integrity
-                    </div>
-                    <a href="../construction-ai-use-cases/index.html" class="industry-link">Explore Construction AI</a>
-                </div>
-
-                <!-- Mining Industry -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">⛏️</div>
-                        <a href="../mining-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Mining Industry</a>
-                    </div>
-                    <div class="industry-description">
-                        Mineral extraction, resource management, operational safety, and environmental compliance
-                    </div>
-                    <a href="../mining-ai-use-cases/index.html" class="industry-link">Explore Mining AI</a>
-                </div>
-
-                <!-- Gaming Industry -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🎮</div>
-                        <a href="../gaming-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Gaming Industry</a>
-                    </div>
-                    <div class="industry-description">
-                        Player experience, game development, live operations, and content creation
-                    </div>
-                    <a href="../gaming-ai-use-cases/index.html" class="industry-link">Explore Gaming AI</a>
-                </div>
-
-                <!-- Sports & Sports Analytics -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">⚽</div>
-                        <a href="../sports-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Sports & Sports Analytics</a>
-                    </div>
-                    <div class="industry-description">
-                        Athletic performance, team management, fan engagement, and competitive strategy
-                    </div>
-                    <a href="../sports-ai-use-cases/index.html" class="industry-link">Explore Sports AI</a>
-                </div>
-
-                <!-- Call Center & Customer Service -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">📞</div>
-                        <a href="../callcenter-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">Call Center & Customer Service</a>
-                    </div>
-                    <div class="industry-description">
-                        Contact center operations, customer experience, and service optimization
-                    </div>
-                    <a href="../callcenter-ai-use-cases/index.html" class="industry-link">Explore Call Center AI</a>
-                </div>
-
-                <!-- CRM Marketing Cloud -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">📧</div>
-                        <a href="../crm-marketing-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">CRM Marketing Cloud</a>
-                    </div>
-                    <div class="industry-description">
-                        Customer relationship management, marketing automation, and campaign optimization
-                    </div>
-                    <a href="../crm-marketing-ai-use-cases/index.html" class="industry-link">Explore CRM Marketing AI</a>
-                </div>
-
-                <!-- CRM Sales Cloud -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">💼</div>
-                        <a href="../crm-sales-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">CRM Sales Cloud</a>
-                    </div>
-                    <div class="industry-description">
-                        Customer relationship management, sales automation, and revenue optimization
-                    </div>
-                    <a href="../crm-sales-ai-use-cases/index.html" class="industry-link">Explore CRM Sales AI</a>
-                </div>
-
-                <!-- CRM Revenue Cloud -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">💰</div>
-                        <a href="../crm-revenue-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">CRM Revenue Cloud</a>
-                    </div>
-                    <div class="industry-description">
-                        Customer relationship management, CPQ automation, billing, and pricing optimization
-                    </div>
-                    <a href="../crm-revenue-ai-use-cases/index.html" class="industry-link">Explore CRM Revenue AI</a>
-                </div>
-
-                <!-- CRM Service Cloud -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🛠️</div>
-                        <a href="../crm-service-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">CRM Service Cloud</a>
-                    </div>
-                    <div class="industry-description">
-                        Customer relationship management, service automation, case management, and support operations
-                    </div>
-                    <a href="../crm-service-ai-use-cases/index.html" class="industry-link">Explore CRM Service AI</a>
-                </div>
-
-                <!-- CRM Communities -->
-                <div class="industry-card">
-                    <div class="industry-title">
-                        <div class="industry-icon">🌐</div>
-                        <a href="../crm-communities-ai-use-cases/index.html" style="color: inherit; text-decoration: none;">CRM Communities</a>
-                    </div>
-                    <div class="industry-description">
-                        Customer/partner portals, community engagement, knowledge sharing, and portal management
-                    </div>
-                    <a href="../crm-communities-ai-use-cases/index.html" class="industry-link">Explore CRM Communities AI</a>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="tech-overview">
-            <h2>📊 Repository Statistics</h2>
-            <p><strong>26 Industry Categories</strong> | <strong>78+ AI Technology Categories</strong> | <strong>200+ Detailed Use Cases</strong></p>
-            
-            <div class="tech-grid">
-                <span class="tech-tag">🔮 Machine Learning & Predictive Analytics</span>
-                <span class="tech-tag">✍️ Generative AI Applications</span>
-                <span class="tech-tag">🤖 Agentic AI Systems</span>
-                <span class="tech-tag">GPT-4/Claude</span>
-                <span class="tech-tag">TensorFlow/PyTorch</span>
-                <span class="tech-tag">Computer Vision</span>
-                <span class="tech-tag">Natural Language Processing</span>
-                <span class="tech-tag">Reinforcement Learning</span>
-                <span class="tech-tag">Deep Learning</span>
-                <span class="tech-tag">Data Analytics</span>
-                <span class="tech-tag">Business Intelligence</span>
-                <span class="tech-tag">Automation</span>
+        <!-- Generative AI Use Cases -->
+        <div id="gen" class="content-section">
+            <h2 class="section-title">✍️ Generative AI Applications</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                AI-powered content creation, analysis, and communication for sports performance, fan engagement, and team management
+            </p>
+
+            <div class="card-grid">
+                <!-- Game Summaries -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📝</div>
+                        <div>
+                            <div class="card-title">Game Summaries</div>
+                            <div class="card-subtitle">Match Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive game summaries with key moments, statistical analysis, and performance highlights for media and fan consumption.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Game Analysis</span>
+                            <span class="tech-tag">Statistical Reporting</span>
+                            <span class="tech-tag">Performance Highlights</span>
+                            <span class="tech-tag">Media Content</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Game Data → Statistical Analysis → Key Moments → Summary Generation → Review → Publication</div>
+                            <div class="architecture-item">Performance Data → Analysis → Highlights → Content → Review → Distribution</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Real-time game statistics</li>
+                                <li>Player performance data</li>
+                                <li>Key moment identification</li>
+                                <li>Historical context</li>
+                                <li>Team narratives</li>
+                                <li>Media requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Summary Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Fan Engagement</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">5-10 minutes</div>
+                                <div class="metric-label">Summary Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scouting Reports -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📋</div>
+                        <div>
+                            <div class="card-title">Scouting Reports</div>
+                            <div class="card-subtitle">Player Analysis</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate detailed scouting reports analyzing player strengths, weaknesses, and potential fit within team systems and strategies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Scouting Analysis</span>
+                            <span class="tech-tag">Player Assessment</span>
+                            <span class="tech-tag">Talent Evaluation</span>
+                            <span class="tech-tag">Team Fit Analysis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Player Data → Performance Analysis → Strengths/Weaknesses → Team Fit → Report Generation → Review</div>
+                            <div class="architecture-item">Scouting Data → Analysis → Assessment → Reporting → Review → Decision</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Player performance statistics</li>
+                                <li>Game footage analysis</li>
+                                <li>Physical measurements</li>
+                                <li>Development trajectory</li>
+                                <li>Team system requirements</li>
+                                <li>Competition analysis</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Report Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Scouting Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">6-8 hours</div>
+                                <div class="metric-label">Report Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Analytics Narratives -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📊</div>
+                        <div>
+                            <div class="card-title">Performance Analytics</div>
+                            <div class="card-subtitle">Data Storytelling</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Transform complex performance analytics into compelling narratives that coaches, players, and management can easily understand and act upon.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Analytics Narratives</span>
+                            <span class="tech-tag">Data Storytelling</span>
+                            <span class="tech-tag">Performance Insights</span>
+                            <span class="tech-tag">Actionable Intelligence</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Analytics Data → Pattern Recognition → Narrative Generation → Insights → Recommendations → Action</div>
+                            <div class="architecture-item">Performance Data → Analysis → Storytelling → Insights → Strategy → Implementation</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Performance metrics</li>
+                                <li>Statistical analysis</li>
+                                <li>Pattern identification</li>
+                                <li>Contextual information</li>
+                                <li>Strategic implications</li>
+                                <li>Action recommendations</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Analytics Clarity</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Strategic Value</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 hours</div>
+                                <div class="metric-label">Narrative Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sponsorship Proposals -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">💼</div>
+                        <div>
+                            <div class="card-title">Sponsorship Proposals</div>
+                            <div class="card-subtitle">Partnership Marketing</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate compelling sponsorship proposals that highlight team value, fan demographics, and marketing opportunities for potential partners.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Sponsorship Marketing</span>
+                            <span class="tech-tag">Partnership Proposals</span>
+                            <span class="tech-tag">Brand Value</span>
+                            <span class="tech-tag">ROI Analysis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Team Data → Fan Analysis → Value Proposition → Proposal Generation → Review → Presentation</div>
+                            <div class="architecture-item">Market Data → Analysis → Proposal → Review → Negotiation → Partnership</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Team performance data</li>
+                                <li>Fan demographic analysis</li>
+                                <li>Market reach metrics</li>
+                                <li>Sponsorship history</li>
+                                <li>Brand alignment opportunities</li>
+                                <li>ROI projections</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Proposal Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Sponsorship Success</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 hours</div>
+                                <div class="metric-label">Proposal Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training Plans -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🏃</div>
+                        <div>
+                            <div class="card-title">Training Plans</div>
+                            <div class="card-subtitle">Athletic Development</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate personalized training plans for athletes based on performance data, goals, and physiological requirements.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Training Planning</span>
+                            <span class="tech-tag">Athletic Development</span>
+                            <span class="tech-tag">Personalization</span>
+                            <span class="tech-tag">Performance Optimization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Athlete Data → Goal Analysis → Plan Generation → Customization → Review → Implementation</div>
+                            <div class="architecture-item">Performance Data → Analysis → Planning → Personalization → Training → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Athlete performance metrics</li>
+                                <li>Physiological data</li>
+                                <li>Training goals</li>
+                                <li>Recovery patterns</li>
+                                <li>Competition schedule</li>
+                                <li>Individual preferences</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Plan Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Athlete Performance</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">3-5 minutes</div>
+                                <div class="metric-label">Plan Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recruitment Documentation -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📄</div>
+                        <div>
+                            <div class="card-title">Recruitment Documentation</div>
+                            <div class="card-subtitle">Talent Acquisition</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive recruitment documentation including player profiles, contract analysis, and team integration strategies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Recruitment Documentation</span>
+                            <span class="tech-tag">Player Profiles</span>
+                            <span class="tech-tag">Contract Analysis</span>
+                            <span class="tech-tag">Integration Planning</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Player Data → Profile Creation → Contract Analysis → Integration Planning → Documentation → Review</div>
+                            <div class="architecture-item">Recruitment Data → Analysis → Documentation → Review → Integration → Success</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Player performance history</li>
+                                <li>Contract requirements</li>
+                                <li>Team integration needs</li>
+                                <li>Legal considerations</li>
+                                <li>Development plans</li>
+                                <li>Success metrics</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Documentation Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Integration Success</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">6-8 hours</div>
+                                <div class="metric-label">Documentation Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
+        </div>
+
+        <!-- Agentic AI Use Cases -->
+        <div id="agentic" class="content-section">
+            <h2 class="section-title">🤖 Agentic AI Systems</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Autonomous AI agents that can reason, plan, and execute complex sports operations and performance management workflows
+            </p>
+
+            <div class="card-grid">
+                <!-- Strategy Simulation Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🎯</div>
+                        <div>
+                            <div class="card-title">Strategy Simulation</div>
+                            <div class="card-subtitle">Tactical Planning</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Simulate game strategies and tactical scenarios to optimize team performance and prepare for different opponent approaches.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Strategy Simulation</span>
+                            <span class="tech-tag">Tactical Planning</span>
+                            <span class="tech-tag">Game Analysis</span>
+                            <span class="tech-tag">Opponent Modeling</span>
+                            <span class="tech-tag">Performance Optimization</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Opponent Data → Strategy Analysis → Simulation → Optimization → Training → Implementation</div>
+                            <div class="architecture-item">Game Data → Analysis → Simulation → Strategy → Training → Execution</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Opponent performance data</li>
+                                <li>Tactical patterns</li>
+                                <li>Player capabilities</li>
+                                <li>Game scenarios</li>
+                                <li>Historical outcomes</li>
+                                <li>Training simulations</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Strategy Effectiveness</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Tactical Advantage</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Game Preparation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Injury Monitoring Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">⚠️</div>
+                        <div>
+                            <div class="card-title">Injury Monitoring</div>
+                            <div class="card-subtitle">Athlete Safety</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Continuously monitor athlete health metrics and provide real-time alerts for potential injury risks and recovery optimization.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Injury Monitoring</span>
+                            <span class="tech-tag">Health Analytics</span>
+                            <span class="tech-tag">Real-time Alerts</span>
+                            <span class="tech-tag">Recovery Optimization</span>
+                            <span class="tech-tag">Athlete Safety</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Health Data → Risk Analysis → Monitoring → Alerts → Prevention → Recovery</div>
+                            <div class="architecture-item">Biometric Data → Analysis → Monitoring → Intervention → Recovery → Optimization</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Biometric sensor data</li>
+                                <li>Training load metrics</li>
+                                <li>Recovery indicators</li>
+                                <li>Injury history</li>
+                                <li>Physiological measurements</li>
+                                <li>Environmental factors</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Injury Prevention</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Recovery Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">24/7</div>
+                                <div class="metric-label">Real-time Monitoring</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recruitment Automation Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🔍</div>
+                        <div>
+                            <div class="card-title">Recruitment Automation</div>
+                            <div class="card-subtitle">Talent Acquisition</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate the talent recruitment process by identifying prospects, analyzing fit, and managing the entire scouting pipeline.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Recruitment Automation</span>
+                            <span class="tech-tag">Talent Scouting</span>
+                            <span class="tech-tag">Prospect Analysis</span>
+                            <span class="tech-tag">Pipeline Management</span>
+                            <span class="tech-tag">Talent Acquisition</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Prospect Data → Analysis → Fit Assessment → Pipeline → Recruitment → Integration</div>
+                            <div class="architecture-item">Scouting Data → Automation → Analysis → Recruitment → Integration → Performance</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Prospect performance data</li>
+                                <li>Team requirements</li>
+                                <li>Development potential</li>
+                                <li>Competition analysis</li>
+                                <li>Integration capabilities</li>
+                                <li>Recruitment timelines</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Recruitment Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Talent Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Team Performance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ticket Pricing Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🎫</div>
+                        <div>
+                            <div class="card-title">Ticket Pricing</div>
+                            <div class="card-subtitle">Revenue Optimization</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Dynamically optimize ticket pricing based on demand forecasting, team performance, and market conditions to maximize revenue.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Dynamic Pricing</span>
+                            <span class="tech-tag">Revenue Optimization</span>
+                            <span class="tech-tag">Demand Analysis</span>
+                            <span class="tech-tag">Market Conditions</span>
+                            <span class="tech-tag">Pricing Strategy</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Market Data → Demand Analysis → Pricing Strategy → Optimization → Revenue → Growth</div>
+                            <div class="architecture-item">Sales Data → Analysis → Pricing → Optimization → Revenue → Results</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical sales data</li>
+                                <li>Team performance metrics</li>
+                                <li>Market demand indicators</li>
+                                <li>Competitor pricing</li>
+                                <li>Seasonal factors</li>
+                                <li>Event significance</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Revenue Optimization</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Ticket Sales</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Market Responsiveness</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fan Engagement Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">❤️</div>
+                        <div>
+                            <div class="card-title">Fan Engagement</div>
+                            <div class="card-subtitle">Audience Experience</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Enhance fan engagement through personalized content, interactive experiences, and targeted communication strategies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Fan Engagement</span>
+                            <span class="tech-tag">Personalization</span>
+                            <span class="tech-tag">Interactive Content</span>
+                            <span class="tech-tag">Communication Strategy</span>
+                            <span class="tech-tag">Experience Enhancement</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Fan Data → Personalization → Content Creation → Engagement → Feedback → Optimization</div>
+                            <div class="architecture-item">Audience Data → Analysis → Engagement → Interaction → Feedback → Improvement</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Fan preference data</li>
+                                <li>Engagement patterns</li>
+                                <li>Content consumption</li>
+                                <li>Feedback mechanisms</li>
+                                <li>Social media interactions</li>
+                                <li>Event participation</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Engagement Improvement</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Fan Satisfaction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Revenue Growth</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training Optimization Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🏃</div>
+                        <div>
+                            <div class="card-title">Training Optimization</div>
+                            <div class="card-subtitle">Performance Enhancement</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Optimize training programs by analyzing athlete performance data, recovery patterns, and individual needs for maximum development.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Training Optimization</span>
+                            <span class="tech-tag">Performance Analysis</span>
+                            <span class="tech-tag">Recovery Monitoring</span>
+                            <span class="tech-tag">Individualized Programs</span>
+                            <span class="tech-tag">Development Tracking</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Performance Data → Analysis → Program Design → Optimization → Training → Results</div>
+                            <div class="architecture-item">Athlete Data → Analysis → Optimization → Training → Monitoring → Improvement</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Athlete performance metrics</li>
+                                <li>Recovery data</li>
+                                <li>Training responses</li>
+                                <li>Individual preferences</li>
+                                <li>Development goals</li>
+                                <li>Competition schedule</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Training Effectiveness</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Performance Improvement</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Injury Prevention</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <footer>
-            <p>✨ Built with cutting-edge AI technologies for the future of industry transformation</p>
+            <p>✨ Built with cutting-edge AI technologies for the future of sports and athletic performance</p>
             <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
-                This repository demonstrates the transformative power of AI across industries, providing practical insights and implementation guidance for the future of work.
+                Note: Implementation requires careful consideration of athlete welfare, competitive integrity, and ethical sports practices
             </p>
-            <a href="https://github.com/srinipusuluri/AIIndustryUseCases" class="github-link">
-                🌟 View on GitHub
-            </a>
         </footer>
     </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the clicked button
+            event.target.classList.add('active');
+        }
+    </script>
 </body>
 </html>
